@@ -233,13 +233,13 @@ class Worker(Thread): # Get details
             return cover_url
         
     def parse_rating(self, root):
-        rating_node = root.xpath('//div[@id="procenta"]')
+        rating_node = root.xpath('//div[@id="procenta"]/span[1]')
         if rating_node:
             rating_string = rating_node[0].text
-            match = re.search('(\d+)', rating_string)
-            if match:
-                rating_proc = match.groups(0)[0]
-                rating_value = math.ceil(int(rating_proc) / 20)
+            if len(rating_string) > 0:
+                stars_ = int(rating_string)
+                rating_value = float(stars_ / 20)
+                self.log('Found rating:%s'%rating_value)
                 return rating_value
         else:
             self.log.info('Rating node not found')
