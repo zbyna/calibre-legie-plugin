@@ -256,6 +256,7 @@ class Worker(Thread): # Get details
             series_text = series_node[0].text_content()
             match = re.search('díl v sérii: (\d+)',series_text)
             if match:
+            	self.log.info('Series Index found: %s'%match.groups(0)[0])
                 return (series_name, int(match.groups(0)[0]))
             else:
                 self.log.info('Series: %s, Index not found'%series_name)

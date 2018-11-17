@@ -9,6 +9,7 @@ __docformat__ = 'restructuredtext en'
 
 import time, re, HTMLParser
 from urllib import quote, unquote
+from urllib import quote_plus
 from Queue import Queue, Empty
 
 from lxml.html import fromstring, tostring
@@ -52,12 +53,11 @@ class Legie(Source):
     def create_title_query(self, log, title=None):
         q = ''
         if title:
-            title = get_udc().decode(title)
-            tokens = []
+            log.info('Title type is %s'%type(title))
+            log.info('Title is: %s'%title)
             title_tokens = list(self.get_title_tokens(title,
                                 strip_joiners=False, strip_subtitle=True))
-            tokens = [quote(t.encode('utf-8') if isinstance(t, unicode) else t) for t in title_tokens]
-            q = '+'.join(tokens)
+            q = quote_plus(' '.join(title_tokens).encode('utf-8'))
         if not q:
             return None
         return '%s/index.php?cast=knihy&search_text=%s'%(Legie.BASE_URL, q)
