@@ -35,7 +35,7 @@ class Legie(Source):
     has_html_comments = True
     supports_gzip_transfer_encoding = True
 
-    BASE_URL = 'http://www.legie.info'
+    BASE_URL = 'https://www.legie.info'
 
     def get_book_url(self, identifiers):
         ff_id = identifiers.get('legie', None)
@@ -94,6 +94,7 @@ class Legie(Source):
             # Now grab the match from the search result, provided the
             # title appears to be for the same book
             if redirected == query:
+            	log.info('No direct link for book, needed to search results page')
                 self._parse_search_results(log, title, root, matches, timeout, query)
             else:
                 matches.append(redirected)
@@ -164,6 +165,7 @@ class Legie(Source):
                 log.info('Found in search results: %s'%(url))
                 matches.append(url)
                 if len(matches) >= max_results:
+                	log.info('Does not found ANYTHING in %s search results' % (max_results))
                     break
         else:
             log.info('Result table was not found')
