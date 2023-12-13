@@ -14,6 +14,7 @@ from urllib.parse import quote_plus
 from calibre import as_unicode
 from calibre.ebooks.metadata.sources.base import Source
 from calibre.utils.cleantext import clean_ascii_chars
+from calibre.ebooks.metadata import check_isbn
 from calibre.utils.icu import lower
 from lxml.html import fromstring
 
@@ -23,7 +24,7 @@ class Legie(Source):
     name                    = 'Legie'
     description             = _('Downloads metadata and covers from Legie.info (only books in Czech, mainly sci-fi and fantasy)')
     author                  = 'Michal Rezny'
-    version                 = (2, 0, 3)
+    version                 = (2, 0, 4)
     minimum_calibre_version = (0, 8, 0)
 
     capabilities = frozenset(['identify', 'cover'])
@@ -58,6 +59,41 @@ class Legie(Source):
         if not q:
             return None
         return '%s/index.php?cast=knihy&search_text=%s'%(Legie.BASE_URL, q)
+    
+    def search_title_for_metadata(self, title, identifiers):
+        meta_dict = dict()
+        if title:
+            import re
+            search_regex = r"(?:isbn|ean|legie|pubdate|pubyear):\S*\d+(?:#\d{4}|x|X)?"
+            meta_title = re.findall(search_regex, title)
+            # Remove matched metadata from title
+            title = re.sub(pattern=search_regex, string=title, repl='')
+            title = ' '.join(title.split())
+            meta_dict = dict([i.split(':') for i in meta_title])
+
+            identifiers_mapping = {
+                'legie': ['legie'],
+                'isbn': ['isbn', 'ean']
+            }
+            for identifier, keys in identifiers_mapping.items():
+                for key in keys:
+                    value = meta_dict.get(key, None)
+                    if value is not None:
+                        if identifier == 'legie' and '#' not in value and identifiers[identifier].split('#')[0] == value:
+                            continue
+                        identifiers[identifier] = value
+
+            meta_dict_mapping = {
+                'pubdate': ['pubdate', 'pubyear'],
+            }
+            remapped_meta_dict = dict()
+            for identifier, keys in meta_dict_mapping.items():
+                for key in keys:
+                    value = meta_dict.get(key, None)
+                    if value is not None:
+                        remapped_meta_dict[identifier] = value
+            meta_dict = remapped_meta_dict
+        return title, identifiers, meta_dict
 
     def identify(self, log, result_queue, abort, title=None, authors=None,
                  identifiers={}, timeout=30):
@@ -67,6 +103,12 @@ class Legie(Source):
         '''
         matches = []
 
+        # search for identifiers and extra metadata in title field format identifier:123456; e.g. databazeknih:1234, pubdate:2023
+        title, identifiers, meta_dict = self.search_title_for_metadata(title, identifiers)
+
+        if identifiers.get('pubdate', None) and not meta_dict.get('pubdate', None):
+            meta_dict['pubdate'] = identifiers['pubdate']
+            identifiers.pop('pubdate')
         # If we have a Legie id then we do not need to fire a "search".
         # Instead we will go straight to the URL for that book.
         legie_id = identifiers.get('legie', None)
@@ -105,7 +147,7 @@ class Legie(Source):
 
         from calibre_plugins.legie.worker import Worker
         author_tokens = list(self.get_author_tokens(authors))
-        workers = [Worker(url, author_tokens, result_queue, br, log, i, self) for i, url in
+        workers = [Worker(url, author_tokens, result_queue, br, log, i, self, meta_dict) for i, url in
                    enumerate(matches)]
 
         for w in workers:

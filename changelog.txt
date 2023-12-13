@@ -1,7 +1,9 @@
+[B]Version 2.0.4[/B] - 8 Dec 2023 (seeder)
+- přidány identifikátory v názvu (legie, pubdate, pubyear)
 [B]Version 2.0.3[/B] - 8 Dec 2023 (seeder)
 - stahuje přibližné datum vydání (obsahuje konkrétní datum) do 'Vydáno'
 [B]Version 2.0.2[/B] - 13 Nov 2020 (Sosie)
-- podpora Calibre 5 (python 3)
+- support for Calibre 5 (python 3)
 [B]Version 2.0.1[/B] - 11 Jun 2012
 Added language information (always "ces")
 [B]Version 2.0[/B] - 4 Aug 2011

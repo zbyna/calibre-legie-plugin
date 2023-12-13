@@ -24,7 +24,7 @@ class Worker(Thread):  # Get details
     Get book details from Webscription book page in a separate thread
     '''
 
-    def __init__(self, url, match_authors, result_queue, browser, log, relevance, plugin, timeout=20):
+    def __init__(self, url, match_authors, result_queue, browser, log, relevance, plugin, extra_metadata, timeout=20):
         Thread.__init__(self)
         self.daemon = True
         self.url, self.result_queue = url, result_queue
@@ -33,6 +33,8 @@ class Worker(Thread):  # Get details
         self.relevance, self.plugin = relevance, plugin
         self.browser = browser.clone_browser()
         self.cover_url = self.legie_id = self.isbn = None
+
+        self.pubdate = extra_metadata.get('pubdate', None)
 
     def run(self):
         try:
@@ -329,6 +331,8 @@ class Worker(Thread):  # Get details
         editions = []
         edition_nodes = root.xpath('//div[@id="vycet_vydani"]/div[@class="vydani cl"]')
         year = cover_url = publisher = isbn = None
+        if self.pubdate:
+            edition_year = self.pubdate
         if edition_nodes:
             for node in edition_nodes:
                 year_node = node.xpath('./h3/a/text()')
