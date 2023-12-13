@@ -131,9 +131,9 @@ class Worker(Thread):  # Get details
                 num_editions = len(editions)
                 self.log.info('Nalezeno %d vydani' % num_editions)
                 for edition in editions:
-                    (year, cover_url, publisher, isbn) = edition
+                    (date_final, cover_url, publisher, isbn) = edition
                     mi = Metadata(title, authors)
-                    self.legie_id = "%s#%s" % (legie_id, year)
+                    self.legie_id = "%s#%s" % (legie_id, str(date_final.year))
                     mi.set_identifier('legie', self.legie_id)
                     mi.source_relevance = self.relevance
                     mi.rating = rating
@@ -148,7 +148,7 @@ class Worker(Thread):  # Get details
                     mi.has_cover = bool(self.cover_url)
                     mi.publisher = publisher
                     mi.isbn = isbn
-                    mi.pubdate = self.prepare_date(int(year))
+                    mi.pubdate = date_final
                     mi.language = "ces"
                     self.result_queue.put(mi)
             else:
@@ -168,7 +168,7 @@ class Worker(Thread):  # Get details
                 mi.has_cover = bool(self.cover_url)
                 mi.publisher = publisher
                 mi.isbn = isbn
-                mi.pubdate = self.prepare_date(int(year))
+                mi.pubdate = date_final
                 mi.language = "ces"
                 self.result_queue.put(mi)
                 if self.legie_id:
@@ -347,13 +347,33 @@ class Worker(Thread):  # Get details
                     match = re.search('([0-9\-xX]+)', isbn_node[0])
                     if match:
                         isbn = match.groups(0)[0].upper()
+                approx_date_node = node.xpath('./div[@class="data_vydani"]/table/tbody/tr/td[contains(text(), "přibližné")]/text()')
+                if approx_date_node:
+                    approx_date = approx_date_node[0]
+                    date_pattern = r'\b(\d{2})\.(\d{2})\.(\d{4})\b'
+                    date_found = re.search(date_pattern, approx_date)
+                    if date_found:
+                        date_final = None
+                        try:
+                            ap_day, ap_month, ap_year = date_found.group(1), date_found.group(2), date_found.group(3)
+                            if ap_day == '00':
+                                ap_day = '01'
+                            date_final = self.prepare_date(int(ap_year), int(ap_month), int(ap_day))
+                        except:
+                            self.log.exception('Failed to parse approx date')
+                        if date_final:
+                            if year == edition_year:
+                                return [(date_final, cover_url, publisher, isbn)]
+                            editions.append((date_final, cover_url, publisher, isbn))
+                            continue
+
                 if year == edition_year:
-                    return [(year, cover_url, publisher, isbn)]
-                editions.append((year, cover_url, publisher, isbn))
+                    return [(self.prepare_date(int(year)), cover_url, publisher, isbn)]
+                editions.append((self.prepare_date(int(year)), cover_url, publisher, isbn))
         else:
             self.log.info("No edition nodes")
         return editions
 
-    def prepare_date(self, year):
+    def prepare_date(self, year, month=1, day=1):
         from calibre.utils.date import utc_tz
-        return datetime.datetime(year, 1, 1, tzinfo=utc_tz)
+        return datetime.datetime(year, month, day, tzinfo=utc_tz)

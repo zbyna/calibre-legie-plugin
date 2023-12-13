@@ -23,7 +23,7 @@ class Legie(Source):
     name                    = 'Legie'
     description             = _('Downloads metadata and covers from Legie.info (only books in Czech, mainly sci-fi and fantasy)')
     author                  = 'Michal Rezny'
-    version                 = (2, 0, 2)
+    version                 = (2, 0, 3)
     minimum_calibre_version = (0, 8, 0)
 
     capabilities = frozenset(['identify', 'cover'])
