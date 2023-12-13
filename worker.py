@@ -3,7 +3,7 @@
 from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
-__license__   = 'GPL v3'
+__license__ = 'GPL v3'
 __copyright__ = '2011, Michal Rezny <miisha@seznam.cz>'
 __docformat__ = 'restructuredtext en'
 
@@ -17,7 +17,8 @@ from calibre.library.comments import sanitize_comments_html
 from calibre.utils.cleantext import clean_ascii_chars
 from calibre.utils.icu import lower
 
-class Worker(Thread): # Get details
+
+class Worker(Thread):  # Get details
 
     '''
     Get book details from Webscription book page in a separate thread
@@ -26,7 +27,7 @@ class Worker(Thread): # Get details
     def __init__(self, url, match_authors, result_queue, browser, log, relevance, plugin, timeout=20):
         Thread.__init__(self)
         self.daemon = True
-        self.url, self.result_queue = url,  result_queue
+        self.url, self.result_queue = url, result_queue
         self.match_authors = match_authors
         self.log, self.timeout = log, timeout
         self.relevance, self.plugin = relevance, plugin
@@ -37,16 +38,16 @@ class Worker(Thread): # Get details
         try:
             self.get_details()
         except:
-            self.log.exception('get_details failed for url: %r'%self.url)
+            self.log.exception('get_details failed for url: %r' % self.url)
 
     def get_details(self):
         try:
-            self.log.info('Legie url: %r'%self.url)
+            self.log.info('Legie url: %r' % self.url)
             raw = self.browser.open_novisit(self.url, timeout=self.timeout).read().strip()
         except Exception as e:
             if callable(getattr(e, 'getcode', None)) and \
                     e.getcode() == 404:
-                self.log.error('URL malformed: %r'%self.url)
+                self.log.error('URL malformed: %r' % self.url)
                 return
             attr = getattr(e, 'args', [None])
             attr = attr if attr else [None]
@@ -54,21 +55,21 @@ class Worker(Thread): # Get details
                 msg = 'Legie timed out. Try again later.'
                 self.log.error(msg)
             else:
-                msg = 'Failed to make details query: %r'%self.url
+                msg = 'Failed to make details query: %r' % self.url
                 self.log.exception(msg)
             return
 
         raw = raw.decode('utf-8', errors='replace')
-        #open('E:\\t3.html', 'wb').write(raw)
+        # open('E:\\t3.html', 'wb').write(raw)
 
         if '<title>404 - ' in raw:
-            self.log.error('URL malformed: %r'%self.url)
+            self.log.error('URL malformed: %r' % self.url)
             return
 
         try:
             root = fromstring(clean_ascii_chars(raw))
         except:
-            msg = 'Failed to parse Legie details page: %r'%self.url
+            msg = 'Failed to parse Legie details page: %r' % self.url
             self.log.exception(msg)
             return
 
@@ -78,25 +79,25 @@ class Worker(Thread): # Get details
         try:
             legie_id = self.parse_legie_id(self.url)
         except:
-            self.log.exception('Error parsing Legie id for url: %r'%self.url)
+            self.log.exception('Error parsing Legie id for url: %r' % self.url)
             legie_id = None
 
         try:
             title = self.parse_title(root)
         except:
-            self.log.exception('Error parsing title for url: %r'%self.url)
+            self.log.exception('Error parsing title for url: %r' % self.url)
             title = None
 
         try:
             authors = self.parse_authors(root)
         except:
-            self.log.exception('Error parsing authors for url: %r'%self.url)
+            self.log.exception('Error parsing authors for url: %r' % self.url)
             authors = []
 
         if not title or not authors or not legie_id:
-            self.log.error('Could not find title/authors/Legie id for %r'%self.url)
-            self.log.error('Legie: %r Title: %r Authors: %r'%(legie_id, title,
-                authors))
+            self.log.error('Could not find title/authors/Legie id for %r' % self.url)
+            self.log.error('Legie: %r Title: %r Authors: %r' % (legie_id, title,
+                                                                authors))
             return
 
         self.legie_id = legie_id
@@ -105,34 +106,34 @@ class Worker(Thread): # Get details
         try:
             rating = self.parse_rating(root)
         except:
-            self.log.exception('Error parsing ratings for url: %r'%self.url)
+            self.log.exception('Error parsing ratings for url: %r' % self.url)
 
         try:
             comments = self.parse_comments(root)
         except:
-            self.log.exception('Error parsing comments for url: %r'%self.url)
+            self.log.exception('Error parsing comments for url: %r' % self.url)
 
         try:
-            (series,series_index) = self.parse_series(root)
+            (series, series_index) = self.parse_series(root)
         except:
             self.log.info('Series not found.')
-        
+
         try:
             tags = self.parse_tags(root)
         except:
-            self.log.exception('Error parsing tags for url: %r'%self.url)
+            self.log.exception('Error parsing tags for url: %r' % self.url)
             tags = None
-        
+
         if legie_id:
             editions = self.get_editions()
-            
+
             if editions:
                 num_editions = len(editions)
-                self.log.info('Nalezeno %d vydani'%num_editions)
+                self.log.info('Nalezeno %d vydani' % num_editions)
                 for edition in editions:
                     (year, cover_url, publisher, isbn) = edition
                     mi = Metadata(title, authors)
-                    self.legie_id = "%s#%s"%(legie_id,year)
+                    self.legie_id = "%s#%s" % (legie_id, year)
                     mi.set_identifier('legie', self.legie_id)
                     mi.source_relevance = self.relevance
                     mi.rating = rating
@@ -161,7 +162,7 @@ class Worker(Thread): # Get details
                 try:
                     self.cover_url = self.parse_cover(root)
                 except:
-                    self.log.exception('Error parsing cover for url: %r'%self.url)
+                    self.log.exception('Error parsing cover for url: %r' % self.url)
                 if tags:
                     mi.tags = tags
                 mi.has_cover = bool(self.cover_url)
@@ -175,30 +176,32 @@ class Worker(Thread): # Get details
                         self.plugin.cache_identifier_to_cover_url(self.legie_id, self.cover_url)
 
     def parse_legie_id(self, url):
-        return re.search('/kniha/(\d+)', url).groups(0)[0]
+        result = re.search('/kniha/(\d+)', url);
+        if result is None:
+            return None;
+        return result.groups(0)[0]
 
     def parse_title(self, root):
         title_node = root.xpath('//h2[@id="nazev_knihy"]')
         if title_node:
-            self.log.info('Title: %s'%title_node[0].text)
+            self.log.info('Title: %s' % title_node[0].text)
             return title_node[0].text
 
     def parse_authors(self, root):
         author_nodes = root.xpath('//div[@id="pro_obal"]/../h3/a')
+        authors = []
         if author_nodes:
-            authors = []
             for author_node in author_nodes:
                 author = author_node.text.strip()
                 authors.append(author)
         else:
             self.log.info('No author has been found')
-        
 
-        def ismatch(authors):
-            authors = lower(' '.join(authors))
+        def ismatch(authors_internal):
+            authors_internal = lower(' '.join(authors_internal))
             amatch = not self.match_authors
             for a in self.match_authors:
-                if lower(a) in authors:
+                if lower(a) in authors_internal:
                     amatch = True
                     break
             if not self.match_authors: amatch = True
@@ -212,15 +215,15 @@ class Worker(Thread): # Get details
         description_nodes = root.xpath('//div[@id="anotace"]/strong/following-sibling::p')
         if not description_nodes:
             description_nodes = root.xpath('//div[@id="nic"]/strong/following-sibling::p')
-        
+
         if description_nodes:
             comments = []
             for node in description_nodes:
                 node_text = node.text_content()
                 if node_text != None:
                     comments.append("<p>" + node_text + "</p>")
-                
-            #comments = tostring(description_node, method='html')
+
+            # comments = tostring(description_node, method='html')
             comments = sanitize_comments_html("".join(comments))
             return comments
         else:
@@ -231,7 +234,7 @@ class Worker(Thread): # Get details
         if cover_node:
             cover_url = 'http://www.legie.info/' + cover_node[0]
             return cover_url
-        
+
     def parse_rating(self, root):
         rating_node = root.xpath('//div[@id="procenta"]/span[1]')
         if rating_node:
@@ -239,11 +242,11 @@ class Worker(Thread): # Get details
             if len(rating_string) > 0:
                 stars_ = int(rating_string)
                 rating_value = float(stars_ / 20)
-                self.log('Found rating:%s'%rating_value)
+                self.log('Found rating:%s' % rating_value)
                 return rating_value
         else:
             self.log.info('Rating node not found')
-            
+
     def parse_series(self, root):
         series_node = root.xpath('//div[@id="kniha_info"]/div/p[starts-with(text(),"série:")]')
         if series_node:
@@ -251,43 +254,43 @@ class Worker(Thread): # Get details
             if series_name_node:
                 series_name = series_name_node[0].text
             else:
-                return (None,None)
+                return (None, None)
 
             series_text = series_node[0].text_content()
-            match = re.search('díl v sérii: (\d+)',series_text)
+            match = re.search('díl v sérii: (\d+)', series_text)
             if match:
-            	self.log.info('Series Index found: %s'%match.groups(0)[0])
+                self.log.info('Series Index found: %s' % match.groups(0)[0])
                 return (series_name, int(match.groups(0)[0]))
             else:
-                self.log.info('Series: %s, Index not found'%series_name)
-                return (series_name, None)  
+                self.log.info('Series: %s, Index not found' % series_name)
+                return (series_name, None)
         else:
             self.log.info('Series node not found')
         return (None, None)
-    
-    def parse_tags(self,root):
+
+    def parse_tags(self, root):
         tags = []
         tags_nodes = root.xpath('//div[@id="kniha_info"]/div/p[starts-with(text(),"Kategorie:")]/a')
         if tags_nodes:
             for node in tags_nodes:
                 tags.append(node.text)
         return tags
-    
+
     def get_editions(self):
         url_parts = self.url.split('#')
         if len(url_parts) == 2:
-            base_url,edition_year = url_parts
+            base_url, edition_year = url_parts
         else:
-            base_url = url_parts[0] 
+            base_url = url_parts[0]
             edition_year = None
-        url = '%s/vydani'%(base_url)
+        url = '%s/vydani' % (base_url)
         try:
-            self.log.info('Legie url: %r'%url)
+            self.log.info('Legie url: %r' % url)
             raw = self.browser.open_novisit(url, timeout=self.timeout).read().strip()
         except Exception as e:
             if callable(getattr(e, 'getcode', None)) and \
                     e.getcode() == 404:
-                self.log.error('URL malformed: %r'%url)
+                self.log.error('URL malformed: %r' % url)
                 return
             attr = getattr(e, 'args', [None])
             attr = attr if attr else [None]
@@ -295,33 +298,33 @@ class Worker(Thread): # Get details
                 msg = 'Legie timed out. Try again later.'
                 self.log.error(msg)
             else:
-                msg = 'Failed to make details query: %r'%url
+                msg = 'Failed to make details query: %r' % url
                 self.log.exception(msg)
             return
 
         raw = raw.decode('utf-8', errors='replace')
-        #open('E:\\t3.html', 'wb').write(raw)
+        # open('E:\\t3.html', 'wb').write(raw)
 
         if '<title>404 - ' in raw:
-            self.log.error('URL malformed: %r'%url)
+            self.log.error('URL malformed: %r' % url)
             return
 
         try:
             root = fromstring(clean_ascii_chars(raw))
         except:
-            msg = 'Failed to parse Legie details page: %r'%url
+            msg = 'Failed to parse Legie details page: %r' % url
             self.log.exception(msg)
             return
 
         self.log.info('Trying to parse editions')
         try:
-            editions = self.parse_editions(root,edition_year)
+            editions = self.parse_editions(root, edition_year)
         except:
             self.log.exception('Failed to parse editions page')
             editions = []
-        
+
         return editions
-    
+
     def parse_editions(self, root, edition_year):
         editions = []
         edition_nodes = root.xpath('//div[@id="vycet_vydani"]/div[@class="vydani cl"]')
@@ -333,14 +336,15 @@ class Worker(Thread): # Get details
                     year = year_node[0]
                 cover_node = node.xpath('./div[@class="ob"]/img/@src')
                 if cover_node:
-                    if cover_node[0] != 'images/kniha-neni.jpg':                      
+                    if cover_node[0] != 'images/kniha-neni.jpg':
                         cover_url = 'http://www.legie.info/' + cover_node[0]
                 publisher_node = node.xpath('./div[@class="data_vydani"]/a[@class="large"]/text()')
                 if publisher_node:
                     publisher = publisher_node[0]
-                isbn_node = node.xpath('.//span[@title="ISBN-International Serial Book Number / mezinarodni unikatni cislo knihy"]/following-sibling::text()')
+                isbn_node = node.xpath(
+                    './/span[@title="ISBN-International Serial Book Number / mezinarodni unikatni cislo knihy"]/following-sibling::text()')
                 if isbn_node:
-                    match = re.search('([0-9\-xX]+)',isbn_node[0])
+                    match = re.search('([0-9\-xX]+)', isbn_node[0])
                     if match:
                         isbn = match.groups(0)[0].upper()
                 if year == edition_year:
@@ -349,7 +353,7 @@ class Worker(Thread): # Get details
         else:
             self.log.info("No edition nodes")
         return editions
-    
-    def prepare_date(self,year):
+
+    def prepare_date(self, year):
         from calibre.utils.date import utc_tz
         return datetime.datetime(year, 1, 1, tzinfo=utc_tz)

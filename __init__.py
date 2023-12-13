@@ -7,18 +7,15 @@ __license__   = 'GPL v3'
 __copyright__ = '2012, Michal Rezny <miisha@seznam.cz>'
 __docformat__ = 'restructuredtext en'
 
-import time, re, HTMLParser
-from urllib import quote, unquote
-from urllib import quote_plus
-from Queue import Queue, Empty
-
-from lxml.html import fromstring, tostring
+import time
+from queue import Empty, Queue
+from urllib.parse import quote_plus
 
 from calibre import as_unicode
 from calibre.ebooks.metadata.sources.base import Source
-from calibre.utils.icu import lower
 from calibre.utils.cleantext import clean_ascii_chars
-from calibre.utils.localization import get_udc
+from calibre.utils.icu import lower
+from lxml.html import fromstring
 
 
 class Legie(Source):
@@ -26,11 +23,11 @@ class Legie(Source):
     name                    = 'Legie'
     description             = _('Downloads metadata and covers from Legie.info (only books in Czech, mainly sci-fi and fantasy)')
     author                  = 'Michal Rezny'
-    version                 = (2, 0, 1)
+    version                 = (2, 0, 2)
     minimum_calibre_version = (0, 8, 0)
 
     capabilities = frozenset(['identify', 'cover'])
-    touched_fields = frozenset(['title', 'authors', 'identifier:legie', 'comments', 'rating', 'series', 
+    touched_fields = frozenset(['title', 'authors', 'identifier:legie', 'comments', 'rating', 'series',
                                 'identifier:isbn', 'publisher', 'pubdate', 'series_index', 'tags', 'language'])
     has_html_comments = True
     supports_gzip_transfer_encoding = True
@@ -49,21 +46,21 @@ class Legie(Source):
         if ff_id is not None:
             url = self.cached_identifier_to_cover_url(ff_id)
         return url
-    
+
     def create_title_query(self, log, title=None):
         q = ''
         if title:
             log.info('Title type is %s'%type(title))
             log.info('Title is: %s'%title)
             title_tokens = list(self.get_title_tokens(title,
-                                strip_joiners=False, strip_subtitle=True))
+                                                      strip_joiners=False, strip_subtitle=True))
             q = quote_plus(' '.join(title_tokens).encode('utf-8'))
         if not q:
             return None
         return '%s/index.php?cast=knihy&search_text=%s'%(Legie.BASE_URL, q)
 
     def identify(self, log, result_queue, abort, title=None, authors=None,
-            identifiers={}, timeout=30):
+                 identifiers={}, timeout=30):
         '''
         Note this method will retry without identifiers automatically if no
         match is found with identifiers.
@@ -94,7 +91,7 @@ class Legie(Source):
             # Now grab the match from the search result, provided the
             # title appears to be for the same book
             if redirected == query:
-            	log.info('No direct link for book, needed to search results page')
+                log.info('No direct link for book, needed to search results page')
                 self._parse_search_results(log, title, root, matches, timeout, query)
             else:
                 matches.append(redirected)
@@ -109,7 +106,7 @@ class Legie(Source):
         from calibre_plugins.legie.worker import Worker
         author_tokens = list(self.get_author_tokens(authors))
         workers = [Worker(url, author_tokens, result_queue, br, log, i, self) for i, url in
-                enumerate(matches)]
+                   enumerate(matches)]
 
         for w in workers:
             w.start()
@@ -142,21 +139,21 @@ class Legie(Source):
 
         title_tokens = list(self.get_title_tokens(orig_title))
         max_results = 10
-        
+
         res = root.xpath('//div[@id="kniha_info"]')
         if res:
             log.info('Found match directly: %s'%(query))
             matches.append(query)
             return
-        
+
         res_path = root.xpath('//table[@class="tabulka-s-okraji"]/tr/td[1]')
-        
+
         if res_path:
             for data in res_path:
                 id = ''.join(data.xpath('./a/@href'))
                 if not id:
                     continue
-    
+
                 title = ''.join(data.xpath('./a/text()'))
                 if not ismatch(title):
                     log.error('Rejecting as not close enough match: %s'%(title))
@@ -165,20 +162,20 @@ class Legie(Source):
                 log.info('Found in search results: %s'%(url))
                 matches.append(url)
                 if len(matches) >= max_results:
-                	log.info('Does not found ANYTHING in %s search results' % (max_results))
-                    break
+                    log.info('Does not found ANYTHING in %s search results' % (max_results))
+                break
         else:
             log.info('Result table was not found')
 
 
     def download_cover(self, log, result_queue, abort,
-            title=None, authors=None, identifiers={}, timeout=30):
+                       title=None, authors=None, identifiers={}, timeout=30):
         cached_url = self.get_cached_cover_url(identifiers)
         if cached_url is None:
             log.info('No cached cover found, running identify')
             rq = Queue()
             self.identify(log, rq, abort, title=title, authors=authors,
-                    identifiers=identifiers)
+                          identifiers=identifiers)
             if abort.is_set():
                 return
             results = []
@@ -212,43 +209,43 @@ if __name__ == '__main__': # tests
     # To run these test use:
     # calibre-debug -e __init__.py
     from calibre.ebooks.metadata.sources.test import (test_identify_plugin,
-            title_test, authors_test, series_test)
+                                                      title_test, authors_test, series_test)
     test_identify_plugin(Legie.name,
-        [
-         
-            ( # A book with no id specified
-                {'title':"Poslední obyvatel z planety Zwor", 'authors':['Jean-pierre Garen']},
-                [title_test("Poslední obyvatel z planety Zwor",
-                    exact=True), authors_test(['Jean-pierre Garen']),
-                    series_test('Mark Stone - Kapitán Služby pro dohled nad primitivními planetami', 1.0)]
+                         [
 
-            ),
+                             ( # A book with no id specified
+                                 {'title':"Poslední obyvatel z planety Zwor", 'authors':['Jean-pierre Garen']},
+                                 [title_test("Poslední obyvatel z planety Zwor",
+                                             exact=True), authors_test(['Jean-pierre Garen']),
+                                  series_test('Mark Stone - Kapitán Služby pro dohled nad primitivními planetami', 1.0)]
 
-            ( # Multiple answers
-                {'title':'Čaroprávnost'},
-                [title_test('Čaroprávnost',
-                    exact=True), authors_test(['Terry Pratchett']),
-                    series_test('Úžasná Zeměplocha', 3.0)]
+                             ),
 
-            ),
+                             ( # Multiple answers
+                                 {'title':'Čaroprávnost'},
+                                 [title_test('Čaroprávnost',
+                                             exact=True), authors_test(['Terry Pratchett']),
+                                  series_test('Úžasná Zeměplocha', 3.0)]
 
-            ( # Book with given id and edition year
-                {'identifiers':{'legie': '103#1996'},'title':'Čaroprávnost'},
-                [title_test('Čaroprávnost',
-                    exact=True), authors_test(['Terry Pratchett']),
-                    series_test('Úžasná Zeměplocha', 3.0)] #80-85609-54-1
+                             ),
 
-            ),
+                             ( # Book with given id and edition year
+                                 {'identifiers':{'legie': '103#1996'},'title':'Čaroprávnost'},
+                                 [title_test('Čaroprávnost',
+                                             exact=True), authors_test(['Terry Pratchett']),
+                                  series_test('Úžasná Zeměplocha', 3.0)] #80-85609-54-1
 
-            ( # A book with a Legie id
-                {'identifiers':{'legie': '973'},
-                    'title':'Drak na Wilku', 'authors':['Jean-Pierre Garen']},
-                [title_test('Drak na Wilku',
-                    exact=True), authors_test(['Jean-Pierre Garen']),
-                    series_test('Mark Stone - Kapitán Služby pro dohled nad primitivními planetami', 7)]
+                             ),
 
-            ),
+                             ( # A book with a Legie id
+                                 {'identifiers':{'legie': '973'},
+                                  'title':'Drak na Wilku', 'authors':['Jean-Pierre Garen']},
+                                 [title_test('Drak na Wilku',
+                                             exact=True), authors_test(['Jean-Pierre Garen']),
+                                  series_test('Mark Stone - Kapitán Služby pro dohled nad primitivními planetami', 7)]
 
-        ])
+                             ),
+
+                         ])
 
 
