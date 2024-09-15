@@ -1,0 +1,1399 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2024-09-11 22:06+0200\n"
+"PO-Revision-Date: 2024-09-11 22:11+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: __init__.py\n"
+"X-Poedit-SearchPath-1: config.py\n"
+"X-Poedit-SearchPath-2: worker.py\n"
+"X-Poedit-SearchPath-3: shared\n"
+"X-Poedit-SearchPath-4: prefs.py\n"
+
+#: __init__.py:36
+msgid ""
+"Downloads metadata and covers from Legie.info (only books in Czech, mainly "
+"sci-fi and fantasy)"
+msgstr ""
+"Stahuje metadata a obálky z Legie.info (pouze knihy v češtině a slovenštině, "
+"převážně sci-fi a fantasy)"
+
+#: __init__.py:48
+#, python-format
+msgid ""
+"Plugin version: <b>%s</b> - Report errors and suggestions through <a "
+"href=\"https://www.mobileread.com/forums/showthread.php?"
+"t=362097\">MobileRead</a> forum."
+msgstr ""
+"Verze modulu: <b>%s</b> - Chyby a návrhy hlašte na <a href=“https://www."
+"mobileread.com/forums/showthread.php?t=362097”>MobileRead</a> fórum."
+
+#: config.py:205
+msgid "Search"
+msgstr "Vyhledávání"
+
+#: config.py:206
+msgid "Title and Authors"
+msgstr "Název a Autoři"
+
+#: config.py:207 shared/prefs.py:140
+msgid "Tags"
+msgstr "Štítky"
+
+#: config.py:208 shared/prefs.py:135
+msgid "Series"
+msgstr "Série"
+
+#: config.py:209
+msgid "Publishers and Date"
+msgstr "Vydavatel a datum"
+
+#: config.py:210
+msgid "Comments"
+msgstr "Komentáře"
+
+#: config.py:211
+msgid "Identifiers"
+msgstr "Identifikátory"
+
+#: config.py:226
+msgid "Searching priority"
+msgstr "Priorita vyhledávání"
+
+#: config.py:231
+msgid "Title ids"
+msgstr "Id v Názvu"
+
+#: config.py:232
+msgid ""
+"You can add identifiers into 'Title' field (in format identifier:value e.g. "
+"legie:123 or publisher:new_publisher)\n"
+"before you start metadata download and they will be used prior built-in one."
+"Identifiers can be combined in title\n"
+"\n"
+"Identifiers available:\n"
+"'legie' for books\n"
+"'legie_povidka' for tales/poems\n"
+"'isbn' and 'ean' for searching by isbn number (legie can search by ISBN "
+"without this prefixes too)\n"
+"\n"
+"Specify wanted issue when Author/Title matching with identifiers:\n"
+"'publisher' for book issue publisher specification (use underscore '_' for "
+"spacing multiple words)\n"
+"'pubdate' and 'pubyear' published edition year specification\n"
+"(e.g. pubdate:2024 will force plugin to prior search for issues from year "
+"2024)\n"
+"'lang' or 'language' for book language specification (lang:cs for czech and "
+"lang:sk for slovak)\n"
+"'type' for book type specification (type:audio type:audiobook type:part type:"
+"tale type:book_part)\n"
+"'search' for enabling specified search engine (search:google search:"
+"duckduckgo)"
+msgstr ""
+"Do pole ’Název’ můžete připsat identifikátory (ve formátu identifikátor:"
+"hodnota, např. databazeknih:123 nebo publisher:nový_vydavatel)\n"
+"před zahájením stahování metadat. Ty pak budou upřednostněny před "
+"vestavěnými identifikátory.\n"
+"Identifikátory v názvu můžete kombinovat.\n"
+"\n"
+"Dostupné identifikátory:\n"
+"‘legie’ pro knihy\n"
+"‘legie_povidka'  pro povídky/básně (části díla)\n"
+"'isbn' a 'ean' pro vyhledávání podle ISBN čísla\n"
+"\n"
+"Specifikace vydání při vyhledávání pomocí kombinace Autorů/Názvu:\n"
+"‘publisher’ pro specifikaci vydavatele vydání knihy (u víceslovných názvů "
+"vydavatelství použijte namísto mezer podtržítko ‘_’)\n"
+"'pubdate' a ‘pubyear’ pro specifikaci roku vydání knihy (publikované edice)\n"
+"(např. pubdate:2024 donutí modul k prioritnímu vyhledávání vydání z roku "
+"2024)\n"
+"‘lang’ nebo ‘language’ pro specifikaci jazyka (lang:cs pro české a  lang:sk "
+"pro slovenské vydání)"
+
+#: config.py:248
+msgid "Id legie"
+msgstr "Id legie"
+
+#: config.py:249
+msgid ""
+"If identifier found in book metadata, plugin will use it for faster book "
+"search.\n"
+"legie for books\n"
+"legie_povidka for poems/tales"
+msgstr ""
+"Pokud je identifikátor nalezen v metadatech knihy,\n"
+"modul jej použije pro rychlejší vyhledávání knih:\n"
+"legie pro knihy\n"
+"legie_povidka pro básně/povídky"
+
+#: config.py:302
+msgid "Default"
+msgstr "Výchozí"
+
+#: config.py:302
+msgid "Czech newest"
+msgstr "České nejnovější"
+
+#: config.py:302
+msgid "Czech oldest"
+msgstr "České nejstarší"
+
+#: config.py:302
+msgid "Slovak newest"
+msgstr "Slovenské nejnovější"
+
+#: config.py:302
+msgid "Slovak oldest"
+msgstr "Slovenské nejstarší"
+
+#: config.py:316
+msgid "Search for additional cover on Obalky knih"
+msgstr "Hledat další obálku na Obálky knih"
+
+#: config.py:317
+msgid ""
+"Tries to search for additional cover using ISBN number on obalkyknih.cz "
+"site. Does not count into max cover limit option."
+msgstr ""
+"Pokusí se pomocí získaného ISBN čísla vyhledat další obálku na webu "
+"obalkyknih.cz. Obálka se nezapočítává do celkového max limitu stahovaných "
+"obálek."
+
+#: config.py:363 config.py:469 config.py:578
+msgid "Add item (Alt+Shift+W)"
+msgstr "Přidat položku (Alt+Shift+W)"
+
+#: config.py:370 config.py:476 config.py:585
+msgid "Delete item (Alt+Shift+S)"
+msgstr "Smazat položku (Alt+Shift+S)"
+
+#: config.py:377 config.py:483 config.py:592
+msgid "Move left (Alt+Shift+A)"
+msgstr "Posunout doleva (Alt+Shift+A)"
+
+#: config.py:384 config.py:490 config.py:599
+msgid "Move right (Alt+Shift+D)"
+msgstr "Posunout doprava (Alt+Shift+D)"
+
+#: config.py:398 shared/prefs.py:129
+msgid "Authors"
+msgstr "Autoři"
+
+#: config.py:399
+msgid "Names of authors will be added into calibre authors metadata field."
+msgstr "Jména autorů budou přidána do pole ‘Autoři’."
+
+#: config.py:403 shared/prefs.py:131
+msgid "Translators"
+msgstr "Překladatelé"
+
+#: config.py:404
+msgid "Names of translators will be added into calibre authors metadata field."
+msgstr "Jména překladatelů budou přidána do pole ‘Autoři’."
+
+#: config.py:408 shared/prefs.py:133
+msgid "Book cover authors"
+msgstr "Autoři obálek"
+
+#: config.py:409
+msgid ""
+"Names of book cover authors will be added into calibre authors metadata "
+"field."
+msgstr "Jména autorů obálek budou přidána do pole ‘Autoři’."
+
+#: config.py:413 shared/prefs.py:132
+msgid "Illustrators"
+msgstr "Ilustrátoři"
+
+#: config.py:414
+msgid ""
+"Names of illustrators will be added into calibre authors metadata field."
+msgstr "Jména ilustrátorů budou přidána do pole ‘Autoři’."
+
+#: config.py:417
+msgid "Save authors with role"
+msgstr "Ukládat roli autora"
+
+#: config.py:418
+msgid ""
+"Writes role (author, translator, illustrator...) after every author in "
+"Authors field.\n"
+"**WONT add role when only Author grabbing is checked"
+msgstr ""
+"Zapíše roli (autor, překlad, ilustrace…) za každým jménem autora v poli "
+"Autoři.\n"
+"**Nezapisuje roli, pokud je zvoleno pouze stahování Autorů"
+
+#: config.py:422
+msgid "Swap authors names with last names"
+msgstr "Prohodit jméno a příjmení"
+
+#: config.py:423
+msgid ""
+"Enable this option if you want to get names in Authors metadata field in "
+"format \"Surname Name\"\n"
+" **Global LN, FN Calibre option is prefered"
+msgstr ""
+"Pokud chcete ukládat jména ve stylu ‘Příjmení Jméno’ zvolte tuto možnost.\n"
+"** Vestavěná možnost ‘Příjmení, Jméno’ je preferována před tímto nastavením"
+
+#: config.py:426
+msgid "Get only one author"
+msgstr "Získat pouze jednoho autora"
+
+#: config.py:427
+msgid ""
+"If the information about the book contains more authors\n"
+" - plugin will add only first one."
+msgstr ""
+"Pokud má kniha vícero autorů\n"
+"- modul zapíše do pole 'Autoři' pouze prvního z nich."
+
+#: config.py:517
+msgid "Legie series and editions to calibre series and editions mappings"
+msgstr ""
+"Přemapování legie sérií a knižních edicí do sérií a knižních edicí "
+"ukládaných v calibre"
+
+#: config.py:522
+msgid "Filter series/editions via mappings"
+msgstr "Filtrovat série a edice dle tabulky"
+
+#: config.py:522
+msgid ""
+"Check this and only mapped series and editions below will get parsed to "
+"Calibre."
+msgstr ""
+"Zaškrtněte tuto možnost a pouze namapované série a knižní edice se budou "
+"ukládat do metadat v Calibre."
+
+#: config.py:529
+msgid "series/editions"
+msgstr "série/edice"
+
+#: config.py:529
+msgid "Series/editions"
+msgstr "Série/edice"
+
+#: config.py:542
+msgid "Actual publication"
+msgstr "Aktuální publikace"
+
+#: config.py:542
+msgid "First publication"
+msgstr "První publikace"
+
+#: config.py:606
+msgid "Legie publishers to calibre publisher mappings"
+msgstr "Přemapování legie vydavatele na vydavatele ukládaného v calibre"
+
+#: config.py:611
+msgid "Filter publishers via mappings"
+msgstr "Filtrovat vydavatele dle tabulky"
+
+#: config.py:611
+msgid "Check this and only mapped publishers below will get parsed to Calibre."
+msgstr ""
+"Zaškrtněte tuto možnost a pouze namapovaní vydavatelé se budou ukládat do "
+"metadat v Calibre."
+
+#: config.py:617
+msgid "publisher"
+msgstr "vydavatel"
+
+#: config.py:617 shared/prefs.py:128
+msgid "Publisher"
+msgstr "Vydavatel"
+
+#: config.py:648
+msgid "Legie category to calibre tag mappings"
+msgstr "Přemapování legie kategorií na štítky ukládané do calibre"
+
+#: config.py:656
+msgid "Filter category via mappings"
+msgstr "Filtrovat kategorii dle tabulky"
+
+#: config.py:656
+msgid "Check this and only mapped category below will get parsed to Calibre."
+msgstr ""
+"Zaškrtněte tuto možnost a pouze namapované kategorie se budou ukládat do "
+"metadat v Calibre."
+
+#: config.py:691
+msgid "Add item (Alt+A)"
+msgstr "Přidat položku (Alt+A)"
+
+#: config.py:697
+msgid "Delete item (Alt+D)"
+msgstr "Smazat položku (Alt+D)"
+
+#: config.py:704
+msgid "Add all items at once (Alt+Q)"
+msgstr "Smazat původní a přidat všechny dostupné položky (Alt+Q)"
+
+#: config.py:711
+msgid "Reset to defaults (Alt+R)"
+msgstr "Restartovat do původního nastavení (Alt+R)"
+
+#: config.py:718
+msgid "Move item up (Alt+W)"
+msgstr "Posunout nahoru (Alt+W)"
+
+#: config.py:725
+msgid "Move item down (Alt+S)"
+msgstr "Posunout dolů (Alt+S)"
+
+#: config.py:754
+msgid "Add mapping (Alt+A)"
+msgstr "Přidat pravidlo (Alt+A)"
+
+#: config.py:761
+msgid "Delete mapping (Alt+D)"
+msgstr "Smazat pravidlo (Alt+D)"
+
+#: config.py:768
+msgid "Rename item (Alt+S)"
+msgstr "Přejmenovat položku (Alt+S)"
+
+#: config.py:775
+msgid "Reset to plugin default mappings (Alt+R)"
+msgstr "Restartovat do původního nastavení (Alt+R)"
+
+#: shared/prefs.py:117
+msgid "Description"
+msgstr "Popis"
+
+#: shared/prefs.py:118
+msgid "——— (Horizontal line)"
+msgstr "——— (Vodorovná čára)"
+
+#: shared/prefs.py:119
+msgid "Custom text"
+msgstr "Vlastní text"
+
+#: shared/prefs.py:120
+msgid "Pages count"
+msgstr "Počet stran"
+
+#: shared/prefs.py:121
+msgid "Cover type"
+msgstr "Vazba knihy"
+
+#: shared/prefs.py:122
+msgid "Print run"
+msgstr "Náklad"
+
+#: shared/prefs.py:123
+msgid "Audio length"
+msgstr "Délka (audiokniha)"
+
+#: shared/prefs.py:124
+msgid "Original title"
+msgstr "Původní název"
+
+#: shared/prefs.py:125
+msgid "Title"
+msgstr "Název"
+
+#: shared/prefs.py:126
+msgid "Original pubdate"
+msgstr "Rok vydání originálu"
+
+#: shared/prefs.py:127
+msgid "Publication date"
+msgstr "Rok vydání"
+
+#: shared/prefs.py:130
+msgid "Real authors"
+msgstr "Autoři (bez pseudonymů)"
+
+#: shared/prefs.py:134
+msgid "Interprets"
+msgstr "Interpreti"
+
+#: shared/prefs.py:136
+msgid "Series index"
+msgstr "Pořadí v sérii"
+
+#: shared/prefs.py:137
+msgid "Book Edition"
+msgstr "Knižní edice"
+
+#: shared/prefs.py:138
+msgid "Book Edition index"
+msgstr "Pořadí v knižní edici"
+
+#: shared/prefs.py:139
+msgid "Genre"
+msgstr "Žánr"
+
+#: shared/prefs.py:141
+msgid "Rating (%)"
+msgstr "Hodnocení (%)"
+
+#: shared/prefs.py:142
+msgid "Rating (0-5)"
+msgstr "Hodnocení (0-5)"
+
+#: shared/prefs.py:143
+msgid "Rating (0-10)"
+msgstr "Hodnocení (0-10)"
+
+#: shared/prefs.py:144
+msgid "Rating count"
+msgstr "Počet hodnocení"
+
+#: shared/prefs.py:145
+msgid "Read tempo (slow 0-100 fast)"
+msgstr "Read tempo (slow 0-100 fast)"
+
+#: shared/prefs.py:146
+msgid "Emotions"
+msgstr "Emotions"
+
+#: shared/prefs.py:147
+msgid "ISBN"
+msgstr "ISBN"
+
+#: shared/prefs.py:148
+msgid "Site identifier"
+msgstr "Identifikátor webu/modulu"
+
+#: shared/prefs.py:149
+msgid "Awards"
+msgstr "Ocenění"
+
+#: shared/prefs.py:150
+msgid "Tales in book"
+msgstr "Seznam povídek/básní"
+
+#: shared/prefs.py:151
+msgid "Trivia"
+msgstr "Zajímavosti"
+
+#: shared/prefs.py:152
+msgid "Contained in books"
+msgstr "Také součástí těchto knih"
+
+#: shared/prefs.py:153
+msgid "Source relevance"
+msgstr "Pořadí ve vyhledávání"
+
+#: shared/prefs.py:154
+msgid "EAN"
+msgstr "EAN"
+
+#: shared/prefs.py:155
+msgid "Price"
+msgstr "Cena"
+
+#: shared/prefs.py:156
+msgid "Language"
+msgstr "Jazyk"
+
+#: shared/prefs.py:157
+msgid "Dimensions"
+msgstr "Rozměry knihy"
+
+#: shared/prefs.py:158
+msgid "Issue number"
+msgstr "Specifikace vydání"
+
+#: shared/prefs.py:159
+msgid "Alternative titles"
+msgstr "Vydáno i pod názvy"
+
+#: shared/prefs.py:160
+msgid "Published separately as"
+msgstr "Část vydaná samostatně jako"
+
+#: shared/prefs.py:161
+msgid "World"
+msgstr "Svět"
+
+#: shared/prefs.py:162
+msgid "Alternative original title"
+msgstr "Jiný (obecně známý) název"
+
+#: shared/prefs.py:163
+msgid "Subtitle"
+msgstr "Podtitul"
+
+#: shared/prefs.py:164
+msgid "Note"
+msgstr "Poznámka"
+
+#: shared/prefs.py:165
+msgid "Category"
+msgstr "Kategorie"
+
+#: shared/prefs.py:166
+msgid "External links"
+msgstr "Externí odkazy"
+
+#: shared/prefs.py:169
+msgid "Restart plugin to defaults"
+msgstr "Obnovit modul do původního nastavení"
+
+#: shared/prefs.py:170
+msgid "Reset plugin to defaults (Alt+Shift+R)"
+msgstr "Restartovat modul do původního nastavení (Alt+Shift+R)"
+
+#: shared/prefs.py:171
+msgid "Are you sure?"
+msgstr "Jste si jisti?"
+
+#: shared/prefs.py:172
+msgid "Add item"
+msgstr "Přidat položku"
+
+#: shared/prefs.py:173
+msgid "Choose item:"
+msgstr "Vyberte položku:"
+
+#: shared/prefs.py:174
+msgid "Add custom text"
+msgstr "Přidat vlastní text"
+
+#: shared/prefs.py:175
+msgid "Write text:"
+msgstr "Napište text:"
+
+#: shared/prefs.py:176
+msgid "Are you sure you want to reset plugin to default settings?"
+msgstr "Opravdu chcete obnovit modul do výchozího nastavení?"
+
+#: shared/prefs.py:177
+msgid "Are you sure you want to delete the selected item?"
+msgstr "Opravdu chcete smazat vybranou položku?"
+
+#: shared/prefs.py:178
+msgid "Are you sure you want to delete selected mappings?"
+msgstr "Opravdu chcete smazat vybrané přemapování?"
+
+#: shared/prefs.py:179
+msgid "Are you sure you want to delete your order and add all available items?"
+msgstr ""
+"Opravdu chcete smazat vaše dosavadní sestavení Komentářů a vložit do "
+"sestavení všechny volitelné položky?"
+
+#: shared/prefs.py:180
+msgid "Are you sure you want to set builder to defaults?"
+msgstr "Opravdu chcete obnovit uspořádání položek do výchozího nastavení?"
+
+#: shared/prefs.py:181
+msgid "Are you sure you want to reset to the plugin default mappings?"
+msgstr "Opravdu chcete obnovit mapování položek do výchozího nastavení?"
+
+#: shared/prefs.py:182
+msgid "Add new mapping"
+msgstr "Přidat nové pravidlo"
+
+#: shared/prefs.py:183 shared/prefs.py:185
+msgid "Enter a website name of an item to create a mapping for:"
+msgstr "Vložte %s z webu, pro který chcete vytvořit přemapování:"
+
+#: shared/prefs.py:184
+msgid "Rename mapping"
+msgstr "Přejmenovat mapování"
+
+#: shared/prefs.py:186
+msgid "Adding Failed"
+msgstr "Přidání se nezdařilo"
+
+#: shared/prefs.py:187
+msgid "Mapping with the same name already exists."
+msgstr "Již existuje mapování se shodným názvem."
+
+#: shared/prefs.py:188
+msgid "Renaming Failed"
+msgstr "Přejmenování se nezdařilo"
+
+#: shared/prefs.py:189
+msgid "An item with the same name already exists."
+msgstr "Již existuje položka se shodným názvem."
+
+#: shared/prefs.py:190
+msgid ""
+"How to create custom column from this Identificators? Check <a "
+"href=\"https://www.mobileread.com/forums/showpost.php?"
+"p=4361821&postcount=2\">MobileRead</a> forum."
+msgstr ""
+"Jak vytvořit vlastní sloupce ze speciálních <i>leg_</i> identifikátorů? "
+"Navštivte <a href=“https://www.mobileread.com/forums/showpost.php?"
+"p=4361821&postcount=2”>Mobileread</a> fórum."
+
+#: shared/prefs.py:191
+msgid "Select what will be added into 'Identifiers' metadata field in Calibre"
+msgstr "Vyberte, co se bude ukládat do pole ‘Identifikátory’"
+
+#: shared/prefs.py:192
+msgid "Rating"
+msgstr "Hodnocení"
+
+#: shared/prefs.py:193
+msgid "Recalculate ratings"
+msgstr "Přepočítat hodnocení"
+
+#: shared/prefs.py:194
+msgid ""
+"Enable this option if you want to parse more accurate rating (it will be "
+"calculated from individual ratings) from site.\n"
+"If unchecked, only provided rating on main book page will be parsed."
+msgstr ""
+"Povolte tuto možnost, jestli chcete získávat přesnější hodnocení (budou "
+"přepočítána z jednotlivých hodnocení) z webu.\n"
+"Pokud nezaškrtnete, bude využito méně přesné hodnocení ze stránky s knihou."
+
+#: shared/prefs.py:195
+msgid "Max decimal places"
+msgstr "Maximální počet desetinných míst"
+
+#: shared/prefs.py:196
+msgid ""
+"With this option you can change accuracy of the float number.\n"
+"**ONLY in recalculated rating"
+msgstr ""
+"Pomocí této volby si můžete upravit přesnost přepočítávaných hodnocení.\n"
+"**Funkční POUZE se zaškrtnutou volbou Přepočítat hodnocení"
+
+#: shared/prefs.py:197
+msgid "Comment builder (What will be parsed into Comments field.)"
+msgstr "Vyberte, co a v jakém pořadí se bude ukládat do pole ‘Komentáře’"
+
+#: shared/prefs.py:198
+msgid "Select what will be added into 'Tags' metadata field in Calibre"
+msgstr "Vyberte, co se bude ukládat do pole ‘Štítky’"
+
+#: shared/prefs.py:199
+msgid "Set what will be parsed into Calibre 'Publisher' field"
+msgstr "Vyberte, co se bude ukládat do pole ‘Vydavatel’ v Calibre"
+
+#: shared/prefs.py:200
+msgid "Set what will be parsed into Calibre 'Published date' field"
+msgstr "Vyberte, co se bude ukládat do pole ‘Vydáno’ (datum vydání) v Calibre"
+
+#: shared/prefs.py:201
+msgid ""
+"You can select date of first publication or this publication to be parsed "
+"here."
+msgstr ""
+"Můžete si vybrat, zda zde chcete zapisovat rok vydání originálu, anebo rok "
+"vydání konkrétní publikace."
+
+#: shared/prefs.py:202
+msgid "Set what will be parsed into Calibre 'Series' column"
+msgstr "Vyberte, co se bude ukládat do pole ’Série’ v Calibre"
+
+#: shared/prefs.py:203
+msgid "Set what will be parsed into Calibre 'series_index'"
+msgstr "Vyberte, co se bude ukládat do pole ’Pořadí v sérii’ v Calibre"
+
+#: shared/prefs.py:204
+msgid "You can select any number value here."
+msgstr ""
+"Můžete si vybrat, jednu z číselných hodnot, která zde bude zapsána.\n"
+"** Objeví se pouze pokud bude existovat hodnota v poli ‘Série’."
+
+#: shared/prefs.py:205
+msgid "Select what will be added into 'Authors' metadata field in Calibre"
+msgstr "Vyberte, co se bude ukládat do pole ‘Autoři’"
+
+#: shared/prefs.py:206
+msgid "Set what will be parsed into Calibre 'Title' column"
+msgstr "Vyberte, co se bude ukládat do pole ’Název’ v Calibre"
+
+#: shared/prefs.py:207
+msgid "Maximum title/author search matches to evaluate (1 = fastest):"
+msgstr "Maximální počet zobrazených výsledků hledání:"
+
+#: shared/prefs.py:208
+msgid "Number of maximum search results which you can get from site."
+msgstr "Určí maximální počet výsledků, které můžete hledáním získat."
+
+#: shared/prefs.py:209
+msgid ""
+"If isbn identifier found in book metadata, plugin will use it for faster "
+"book search."
+msgstr ""
+"Pokud je v metadatech knihy nalezen isbn identifikátor, modul jej využije k "
+"rychlejšímu nalezení knihy."
+
+#: shared/prefs.py:210
+msgid "Audiobook"
+msgstr "Audioknihy"
+
+#: shared/prefs.py:211
+msgid "Try to prefer audiobook issue of the book if exists."
+msgstr ""
+"Modul bude upřednostňovat audioknihy před knihami/eknihami ve výběru vydání."
+
+#: shared/prefs.py:212
+msgid "Books"
+msgstr "Knihy"
+
+#: shared/prefs.py:213
+msgid ""
+"Search for books\n"
+"\n"
+"using built-in search engine:\n"
+" whole title + last name of first author > only title + all authors > whole "
+"title > only one word from title (longest first) >\n"
+"> all authors > only one author > only one part of authors name\n"
+"\n"
+"using Google/DuckDuckGo search engine: title + all authors"
+msgstr ""
+"K vyhledávání knih využívá:\n"
+"\n"
+"při hledání přes vyhledávač na webu:\n"
+"název + příjmení prvního autora > název a všechny autory > pouze celý název "
+"> pouze jedno slovo z názvu (od nejdelších) >\n"
+"> všechny autory > pouze jednoho autora > pouze jednu část autorova jména\n"
+"\n"
+"při hledání přes Google/DuckDuckGo vyhledávač: název a všechny autory"
+
+#: shared/prefs.py:215
+msgid "Tales"
+msgstr "Povídky (Části díla)"
+
+#: shared/prefs.py:216
+msgid ""
+"Check this if you want to search in tales before searching in books.\n"
+"Search for tales/poems attempts:\n"
+"title + all authors > only whole title > only one word from title (longest "
+"first)"
+msgstr ""
+"Tuto možnost zaškrtněte, pokud chcete nejprve před vyhledáváním v knihách "
+"prohledat povídky.\n"
+"Modul vyhledává povídky v tomto pořadí:\n"
+"pomocí názvu + všech autorů > pouze názvu > pouze jednoho slova názvu (od "
+"nejdelších)"
+
+#: shared/prefs.py:218
+msgid "Search engine"
+msgstr "Vyhledávač"
+
+#: shared/prefs.py:219
+msgid "Google search"
+msgstr "Vyhledávání Google"
+
+#: shared/prefs.py:220
+msgid ""
+"Tries to search for book or tale/poem via google search engine prior to "
+"built-in site search."
+msgstr ""
+"Zkusí najít knihu nebo povídku (část díla) pomocí vyhledávání Google. Pokud "
+"nenajde žádné výsledky, pokračuje ve vyhledávání pomocí dalšího vyhledávače."
+
+#: shared/prefs.py:221
+msgid "DuckDuckGo search"
+msgstr "Vyhledávání DuckDuckGo"
+
+#: shared/prefs.py:222
+msgid ""
+"Tries to search for book or tale/poem via DuckDuckGo search engine prior to "
+"built-in site search."
+msgstr ""
+"Zkusí najít knihu nebo povídku (část díla) pomocí vyhledávání DuckDuckGo. "
+"Pokud nenajde žádné výsledky, pokračuje ve vyhledávání pomocí dalšího "
+"vyhledávače."
+
+#: shared/prefs.py:223
+msgid "Built-in search"
+msgstr "Vyhledávání na webu"
+
+#: shared/prefs.py:224
+msgid "Tries to search for book or tale/poem via built-in site search engine."
+msgstr "Zkusí najít knihu nebo povídku (část díla) pomocí vyhledávání na webu."
+
+#: shared/prefs.py:225
+msgid "Book issues"
+msgstr "Vydání knihy"
+
+#: shared/prefs.py:226
+msgid "Choose preferred book issue"
+msgstr "Vyberte preferované vydání knihy"
+
+#: shared/prefs.py:227
+msgid ""
+"Set which issue of the book will be preferred. You can choose between czech/"
+"slovak and oldest/newest.\n"
+"Default will be chosen if specified issue not found."
+msgstr ""
+"Nastavte si, které vydání knihy bude preferováno. Můžete si vybrat mezi "
+"českým/slovenským a nejnovějším/nejstarším.\n"
+"Výchozí nalezené vydání knihy bude zvoleno, pokud to zde specifikované "
+"nebude dostupné."
+
+#: shared/prefs.py:228
+msgid "Covers"
+msgstr "Obálky"
+
+#: shared/prefs.py:229
+msgid "Maximum covers from other issues to evaluate (1 = fastest):"
+msgstr "Maximální počet stahovaných obálek knihy:"
+
+#: shared/prefs.py:230
+msgid ""
+"Set max covers to download. Faster evaluating if set to 1 with Default "
+"preferred issue set\n"
+"\n"
+"When set to 0 - no covers will be downloaded.\n"
+"When set to 1 and preferred book issue option set to default - only default "
+"found issue cover will be downloaded.\n"
+"When set to >1 all covers from preferred issue language are downloaded\n"
+"- When preferred czech only all czech cover gets downloaded and vice-versa "
+"(default option recognizes language of default book)\n"
+"- oldest/newest order does matter if max cover option < available covers"
+msgstr ""
+"Zvolte maximální počet stahovaných obálek. Rychleji vyhledává, pokud je "
+"nastaveno na 1 (zároveň s volbou vydání knihy na Výchozí).\n"
+"\n"
+"Při volbě 0 - nebudou staženy žádné obálky.\n"
+"Při volbě 1 a zároveň preferovaného vydání knihy na Výchozí - pouze obálka "
+"výchozího vydání bude stažena\n"
+"Při volbě >1 se stáhnou pouze všechny obálky z preferovaného jazyka vydání.\n"
+"- při preferované češtině se stáhnou pouze všechny české obálky a naopak "
+"(volba Výchozí rozpozná jazyk výchozího vydání).\n"
+"- na pořadí nejstarší/nejnovější záleží, pokud je maximální počet "
+"stahovaných obálek < počet dostupných obálek"
+
+#: shared/prefs.py:236
+msgid "Comment item"
+msgstr "Položka komentáře"
+
+#: shared/prefs.py:237
+msgid "Tag item"
+msgstr "Položka štítku"
+
+#: shared/prefs.py:238
+msgid "Metadata Item"
+msgstr "Položka metadat"
+
+#: shared/prefs.py:239
+msgid "Identifier format"
+msgstr "Formát identifikátoru"
+
+#: shared/prefs.py:240
+msgid "Maps to Calibre"
+msgstr "Přemapovat na Calibre"
+
+#: shared/source.py:18
+#, python-format
+msgid "Plugin version: <b>%s</b>"
+msgstr "Verze zásuvného modulu: <b>%s</b>"
+
+#~ msgid "Identifier legie"
+#~ msgstr "Identifikátor legie"
+
+#~ msgid "Alt+Shift+R"
+#~ msgstr "Alt+Shift+R"
+
+#~ msgid "Legie"
+#~ msgstr "Legie"
+
+#~ msgid "Title: "
+#~ msgstr "Název: "
+
+#~ msgid "Alt+Shift+W"
+#~ msgstr "Alt+Shift+W"
+
+#~ msgid "Alt+Shift+S"
+#~ msgstr "Alt+Shift+S"
+
+#~ msgid "Alt+Shift+A"
+#~ msgstr "Alt+Shift+A"
+
+#~ msgid "Alt+Shift+D"
+#~ msgstr "Alt+Shift+D"
+
+#~ msgid "Series: "
+#~ msgstr "Série: "
+
+#~ msgid "Add to series"
+#~ msgstr "Přidat do série"
+
+#~ msgid "Are you sure you want to set series builder to defaults?"
+#~ msgstr ""
+#~ "Opravdu chcete obnovit uspořádání položek v poli Série do výchozího "
+#~ "nastavení?"
+
+#~ msgid "Publisher: "
+#~ msgstr "Vydavatel: "
+
+#~ msgid "Add to publisher"
+#~ msgstr "Přidat do pole Vydavatel"
+
+#~ msgid "Are you sure you want to set publisher builder to defaults?"
+#~ msgstr ""
+#~ "Opravdu chcete obnovit uspořádání položek v poli Vydavatel do výchozího "
+#~ "nastavení?"
+
+#~ msgid "Alt+A"
+#~ msgstr "Alt+A"
+
+#~ msgid "Alt+D"
+#~ msgstr "Alt+D"
+
+#~ msgid "Alt+S"
+#~ msgstr "Alt+S"
+
+#~ msgid "Alt+R"
+#~ msgstr "Alt+R"
+
+#~ msgid "Alt+Q"
+#~ msgstr "Alt+Q"
+
+#~ msgid "Alt+Up"
+#~ msgstr "Akt+Nahoru"
+
+#~ msgid "Alt+W"
+#~ msgstr "Alt+W"
+
+#~ msgid "Alt+Down"
+#~ msgstr "Alt+Dolů"
+
+#~ msgid "Add to comments"
+#~ msgstr "Přidat do komentářů"
+
+#~ msgid "Are you sure you want to set comment builder to defaults?"
+#~ msgstr "Opravdu chcete obnovit Komentáře do výchozího nastavení?"
+
+#~ msgid "category"
+#~ msgstr "kategorie"
+
+#~ msgid "Tag(s)"
+#~ msgstr "Štítky"
+
+#~ msgid "Identifiers and Rating"
+#~ msgstr "Identifikátory a Hodnocení"
+
+#~ msgid "Real Name Authors"
+#~ msgstr "Autoři (bez pseudonymů)"
+
+#~ msgid ""
+#~ "Real names of authors (no pseudonyms) will be added into calibre authors "
+#~ "metadata field."
+#~ msgstr ""
+#~ "Pravá (civilní) jména autorů (ne pseudonymy) budou přidána do pole "
+#~ "‘Autoři’."
+
+#~ msgid ""
+#~ "Check this if you want to search in tales before searching in books.\n"
+#~ "Tales on legie contain less metadata information than regular books.\n"
+#~ "Search for tales/poems attempts:\n"
+#~ "title + all authors > only whole title > only one word from title "
+#~ "(longest first)\n"
+#~ "\n"
+#~ "This plugin uses default Calibre metadata fields differently than "
+#~ "intended for books\n"
+#~ "and DON'T support some features like tags mapping and comment builder.\n"
+#~ "Here is how this plugin use fields for tales:\n"
+#~ "--------------------------------------------------\n"
+#~ "legie info > Calibre data field\n"
+#~ "---------------------------------------------------\n"
+#~ "title > Title\n"
+#~ "author(s) > Authors\n"
+#~ "!!books containing this tale > Tags\n"
+#~ "percent rating > 5 star Rating\n"
+#~ "description > Comments\n"
+#~ "!original publication year > Published date\n"
+#~ "!!original title > Publisher"
+#~ msgstr ""
+#~ "Tuto možnost zaškrtněte, pokud chcete nejprve před vyhledáváním v knihách "
+#~ "prohledat povídky.\n"
+#~ "Povídky na legii obsahují méně metadat než běžné knihy.\n"
+#~ "Modul vyhledává povídky v tomto pořadí:\n"
+#~ "pomocí názvu + všech autorů > pouze názvu > pouze jednoho slova názvu (od "
+#~ "nejdelších)"
+
+#~ msgid "Set which part of legie series name information will be saved"
+#~ msgstr "Vyberte, kterou část názvu série z legie chcete ukládat"
+
+#, fuzzy
+#~| msgid ""
+#~| "Databazeknih saves many series names in both Czech and Slovak languages "
+#~| "separated with \" / \".\n"
+#~| "You can select whole name of the series or Czech/Slovak part only to be "
+#~| "saved and then remapped into calibre."
+#~ msgid ""
+#~ "Legie saves many series names in both Czech and Slovak languages "
+#~ "separated with \" / \".\n"
+#~ "You can select whole name of the series or Czech/Slovak part only to be "
+#~ "saved and then remapped into calibre."
+#~ msgstr ""
+#~ "Databazeknih má mnoho názvů sérií zapsaných dvojjazyčně oddělené lomítkem "
+#~ "“ / “ (Český název / Slovenský název).\n"
+#~ "Zde si můžete zvolit, zda chcete z databazeknih získávat celý název nebo "
+#~ "pouze českou/slovenskou část.\n"
+#~ "Teprve až zvolená část bude následně přemapována/filtrována podle "
+#~ "mapovací tabulky."
+
+#~ msgid "Whole name"
+#~ msgstr "Celý název"
+
+#~ msgid "Czech part"
+#~ msgstr "Český název"
+
+#~ msgid "Slovak part"
+#~ msgstr "Slovenský název"
+
+#~ msgid "Downloads metadata and covers from databazeknih."
+#~ msgstr "Stahuje metadata a obálky knih z databazeknih."
+
+#~ msgid "Identifier databazeknih"
+#~ msgstr "Identifikátor databazeknih"
+
+#~ msgid "Id databazeknih"
+#~ msgstr "Id databazeknih"
+
+#~ msgid "Databazeknih"
+#~ msgstr "Databázeknih"
+
+#~ msgid "Filter genre/tags via mappings"
+#~ msgstr "Filtrovat žánry a štítky dle tabulky"
+
+#~ msgid ""
+#~ "Check this and only mapped genre and tags below will get parsed to "
+#~ "Calibre."
+#~ msgstr ""
+#~ "Zaškrtněte tuto možnost a pouze namapované žánry a štítky se budou "
+#~ "ukládat do metadat v Calibre."
+
+#~ msgid "genre"
+#~ msgstr "žánr"
+
+#~ msgid "Series only"
+#~ msgstr "Pouze série"
+
+#~ msgid "Editions only"
+#~ msgstr "Pouze edice"
+
+#~ msgid "Series before Editions"
+#~ msgstr "Preferovat série"
+
+#~ msgid "Editions before Series"
+#~ msgstr "Preferovat edice"
+
+#~ msgid "Get databazeknih identifier"
+#~ msgstr "Získat databazeknih identifikátor"
+
+#~ msgid ""
+#~ "Saves databazeknih identifier to book metadata.\n"
+#~ " **NOT RECOMENDED to uncheck, because of book cover download issues."
+#~ msgstr ""
+#~ "Uloží databazeknih identifikátor do metadat knihy.\n"
+#~ " **NEDOPORUČUJE se odškrtnout, protože mohou nastat problémy se "
+#~ "stahováním obálek."
+
+#~ msgid "Get ISBN identifier"
+#~ msgstr "Získat ISBN"
+
+#~ msgid ""
+#~ "If the databazeknih.cz website contains ISBN number\n"
+#~ " - it will be added as metadata ISBN identifier."
+#~ msgstr ""
+#~ "Pokud informace o knize na databazeknih.cz obsahuje ISBN číslo\n"
+#~ "- bude přidáno jako ISBN identifikátor k metadatům knihy."
+
+#~ msgid "Books (Title/Authors combinations)"
+#~ msgstr "Knihy (kombinace názvu a autorů)"
+
+#~ msgid ""
+#~ "Set max covers to download. Faster evaluating if set to 1 (even faster "
+#~ "with Default prefered issue set)\n"
+#~ "- plugin downloads only cover from first prefered issue."
+#~ msgstr ""
+#~ "Nastavte si maximální počet obálek, které bude modul stahovat. Rychleji "
+#~ "vyhledává, pokud je nastaven na 1 (nejlépe s nastavením preferovaných "
+#~ "vydání na Výchozí)\n"
+#~ "- modul vyhledá pouze obálku z prvního preferovaného vydání."
+
+#~ msgid ""
+#~ "If the information about the book contains databazeknih identifier\n"
+#~ " - plugin shows you metadata of given identifier."
+#~ msgstr ""
+#~ "Pokud kniha obsahuje identifikátor databazeknih\n"
+#~ "- modul vyhledá informace o knize s daným identifikátorem.\n"
+#~ "\n"
+#~ "(priorita vyhledávání: DK identifikátor > ISBN > Název a Autor)"
+
+#~ msgid ""
+#~ "If the information about the book contains ISBN number\n"
+#~ " - plugin shows you DK metadata of given ISBN."
+#~ msgstr ""
+#~ "Pokud kniha obsahuje ISBN identifikátor\n"
+#~ "- modul vyhledá informace o knize s daným ISBN číslem.\n"
+#~ "\n"
+#~ "(priorita vyhledávání: DK identifikátor > ISBN > Název a Autor)"
+
+#~ msgid "Comment builder"
+#~ msgstr "Vyberte, co a v jakém pořadí se bude ukládat do pole ‘Komentáře’"
+
+#~ msgid "Set max covers to download. Faster evaluating if set to 1."
+#~ msgstr ""
+#~ "Nastavte si maximální počet obálek, které budou zobrazeny ve výsledcích "
+#~ "stahování."
+
+#~ msgid "Add mapping"
+#~ msgstr "Přidat pravidlo"
+
+#~ msgid "Rename item"
+#~ msgstr "Přejmenovat položku"
+
+#~ msgid "series"
+#~ msgstr "série"
+
+#~ msgid "Query search by"
+#~ msgstr "Vyhledávat pomocí"
+
+#~ msgid "Saves databazeknih identifier to book metadata."
+#~ msgstr ""
+#~ "Uloží databazeknih identifikátor ke knize.\n"
+#~ "**NEDOPORUČUJE se vypínat, kvůli problémům se stahováním obálky."
+
+#~ msgid "Add additional information to comment section"
+#~ msgstr "Přidat do komentářů"
+
+#~ msgid "Restart required"
+#~ msgstr "Vyžadován restart"
+
+#~ msgid ""
+#~ "Title image not found - you must restart Calibre before using this plugin!"
+#~ msgstr "Před použitím tohoto modulu musíte restartovat Calibre!"
+
+#~ msgid "Undefined"
+#~ msgstr "Neznámý"
+
+#~ msgid "Restart calibre now"
+#~ msgstr "Vyžadován restart"
+
+#~ msgid "Add genre/tag mapping"
+#~ msgstr "Přidat mapování žánru/štítku"
+
+#~ msgid "Rename DatabazeKnih.CZ genre/tag"
+#~ msgstr "Přejmenovat DatabazeKnih.CZ žánr/štítek"
+
+#~ msgid "Genre/Tag"
+#~ msgstr "Žánr/Štítek"
+
+#~ msgid "Add series mapping"
+#~ msgstr "Přidat mapování série"
+
+#~ msgid "Add publisher mapping"
+#~ msgstr "Přidat mapování vydavatelství"
+
+#~ msgid "Rename DatabazeKnih publisher"
+#~ msgstr "Přejmenovat DatabazeKnih.CZ vydavatelství"
+
+#~ msgid "Use Authors in search query"
+#~ msgstr "Použít Autory ve vyhledávání"
+
+#~ msgid ""
+#~ "If the information about the book contains authors\n"
+#~ " - plugin will use authors in search query.\n"
+#~ "**NOT RECOMENDED!!"
+#~ msgstr ""
+#~ "Pokud kniha již obsahuje informace o Autorech\n"
+#~ "- modul je využije ve vyhledávacím poli na DatabazeKnih.CZ.\n"
+#~ "**NEDOPORUČENO zaškrtávat\n"
+#~ "(Nejlépe se kniha vyhledává podle ÚPLNÉHO názvu knihy.)"
+
+#~ msgid "Use direct DK Identifier link"
+#~ msgstr "Použít přímý DK odkaz na knihu"
+
+#~ msgid "Search via ISBN"
+#~ msgstr "Vyhledat pomocí ISBN"
+
+#~ msgid "Parsing"
+#~ msgstr "Získávání informací"
+
+#~ msgid "Change DK identifier:"
+#~ msgstr "Změnit identifikátor databazeknih:"
+
+#, fuzzy
+#~| msgid ""
+#~| "You can change DK identifier which directs you to DK book detail page.\n"
+#~| "Use \"!\" for shortest version (just book number)\n"
+#~| "Leave blank for original version\n"
+#~| "\n"
+#~| "Or use your own keyword, for example: \"book-\", \"b-\""
+#~ msgid ""
+#~ "You can change DK identifier which directs you to DK book detail page.\n"
+#~ "Use \"!\" for shortest version (just book number)\n"
+#~ "Leave blank for original version\n"
+#~ "\n"
+#~ "Or use your own keyword, for example: \"book\", \"b\""
+#~ msgstr ""
+#~ "Můžete změnit identifikátor databazeknih, který odkazuje na stránku s "
+#~ "detailem knihy na databazeknih.cz.\n"
+#~ "\tNechte pole prázdné, pokud chcete použít původní  verzi identifikátoru "
+#~ "(nazev-knihy-123).\n"
+#~ "\tPoužijte symbol vykřičníku (!) pokud chcete používat nejkratší verzi "
+#~ "identifikátoru - pouze číslo (123)\n"
+#~ "\n"
+#~ "\tAnebo můžete použít své vlastní klíčové slovo např \"kniha\" "
+#~ "(kniha-123) nebo \"k\" (k-123)\n"
+#~ "\n"
+#~ "POZNÁMKA: používejte pouze ALFANUMERICKÉ znaky bez diakritiky a jako "
+#~ "oddělovač pomlčku \"-\" (např. \"Moje-Knizka\")"
+
+#~ msgid "Genre and Tags"
+#~ msgstr "Žánr a Štítky"
+
+#~ msgid "Get ISBN from DK"
+#~ msgstr "Získat ISBN z DK"
+
+#~ msgid "Don't append"
+#~ msgstr "Nepřidávat"
+
+#~ msgid "To the Top"
+#~ msgstr "Na začátek"
+
+#~ msgid "At the End"
+#~ msgstr "Na konec"
+
+#~ msgid "Number of pages"
+#~ msgstr "Počet stran"
+
+#~ msgid ""
+#~ "If the information about the book will contain the number of pages\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o počtu stran\n"
+#~ "- bude přidán do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain the original title\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o původním názvu knihy\n"
+#~ "- bude přidán do komentáře."
+
+#~ msgid "Original year"
+#~ msgstr "Rok 1. vydání"
+
+#~ msgid ""
+#~ "If the information about the book will contain the year of first "
+#~ "publication\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o roku 1. vydání knihy\n"
+#~ "- bude přidán do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain info about translators\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o překladatelích\n"
+#~ "- budou přidáni do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain the edition and edition "
+#~ "index\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o edici, popřípadě pořadí v edici\n"
+#~ "- budou přidány do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain genres\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o žánrech\n"
+#~ "- budou přidány do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain tags\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o štítcích\n"
+#~ "- budou přidány do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain rating\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o procentuálním hodnocení\n"
+#~ "- bude přidáno do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain ISBN\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o ISBN knihy\n"
+#~ "- bude přidáno do komentáře."
+
+#~ msgid ""
+#~ "If the information about the book will contain databazeknih identifier\n"
+#~ "- it will be appended to the comment."
+#~ msgstr ""
+#~ "Pokud modul získá informaci o identifikátoru databazeknih\n"
+#~ "- bude přidán do komentáře.\n"
+#~ "Původní - originální verze identifikátoru\n"
+#~ "Vlastní - upravená verze, kterou si můžete zvolit v nastavení \"Změnit "
+#~ "identifikátor databazeknih\"\n"
+#~ "Krátký - nejkratší verze identifikátoru (pouze číslo)"
+
+#~ msgid "Original"
+#~ msgstr "Původní"
+
+#~ msgid "Short"
+#~ msgstr "Krátký"
+
+#~ msgid "Enter a Databazeknih genre/tag name to create a mapping for:"
+#~ msgstr ""
+#~ "Vložte Žánr/Štítek z DatabazeKnih.CZ, pro který chcete vytvořit "
+#~ "přemapování:"
+
+#~ msgid "A genre/tag with the same name already exists"
+#~ msgstr "Již existuje žánr/štítek se shodným názvem"
+
+#~ msgid "Enter a Databazeknih publisher name to create a mapping for:"
+#~ msgstr ""
+#~ "Vložte vydavatelství z DatabazeKnih.CZ, pro který chcete vytvořit "
+#~ "přemapování:"
+
+#~ msgid "A publisher with the same name already exists"
+#~ msgstr "Již existuje vydavatelství se shodným názvem"
+
+#~ msgid "Are you sure you want to delete the selected genre/tag mappings?"
+#~ msgstr "Opravdu chcete smazat vybrané přemapování žánru/štítku?"
+
+#~ msgid "Are you sure you want to delete the selected publisher mappings?"
+#~ msgstr "Opravdu chcete smazat vybrané přemapování vydavatelství?"
+
+#~ msgid ""
+#~ "Are you sure you want to reset to the plugin default genre/tags mappings?"
+#~ msgstr ""
+#~ "Opravdu chcete obnovit mapování žánrů/štítků do výchozího nastavení?"
+
+#~ msgid ""
+#~ "Are you sure you want to reset to the plugin default publisher mappings?"
+#~ msgstr ""
+#~ "Opravdu chcete obnovit mapování vydavatelství do výchozího nastavení?"
+
+#, fuzzy
+#~| msgid ""
+#~| "Are you sure you want to reset to the plugin default genre mappings?"
+#~ msgid ""
+#~ "Are you sure you want to reset to the plugin default category mappings?"
+#~ msgstr "Opravdu chcete obnovit mapování žánrů do výchozího nastavení?"
+
+#~ msgid "Rename Legie series"
+#~ msgstr "Přejmenovat Legie sérii"
+
+#~ msgid "Enter a Databazeknih.CZ genre name to create a mapping for:"
+#~ msgstr ""
+#~ "Vložte Žánr z DatabazeKnih.CZ, pro který chcete vytvořit přemapování:"
+
+#~ msgid "DatabazeKnih.CZ Genre"
+#~ msgstr "Žánr z DatabazeKnih.CZ"

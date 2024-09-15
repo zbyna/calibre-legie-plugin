@@ -1,3 +1,24 @@
+[B]Version 2.1.2[/B] - 11 Sep 2024 (seeder)
+- umí dohledat knihu s neznámým autorem a s více autory (ve výsledcích vyhledávání jako 'kolektiv autorů')
+- umí dohledat knihu pomocí ISBN zapsaného v Názvu i bez prefixu 'isbn:'
+- kontrola, zda se hledaný název vyskytuje v nalezeném názvu (pokud nejprve nenalezne shodu v autorech) 
+- úprava řazení podle názvu (nebere v potaz diakritiku/interpunkci)
+- oprava chyby při hledání konkrétního vydání pomocí změny Názvu (přidáním Pořadí ve vyhledávání)
+- oprava nefunkčnosti modulu (závislost na databazeknih)
+[B]Version 2.1.1[/B] - 29 Jun 2024 (seeder)
+- stahuje ocenění, externí odkazy, vazbu knihy, poznámku vydání
+- oprava stahování popisu knihy (nyní stahuje text i s kurzívou, tučně apod.)
+- oprava pořadí v sérii, pořadí v edici, hodnocení
+- oprava stahování metadat povídek (kategorie, součást knih)
+- oprava vyhledávání knihy (vyhodilo chybu, pokud ve výsledcích hledání byly nalezeny profily Autorů)
+[B]Version 2.1.0[/B] - 27 Jun 2024 (seeder)
+- změna po vzoru databazeknih.cz a xTrance.info pluginu
+- plugin nabízí možnosti konfigurace (dodatečná metadata, úpravy metadat, přemapování štítků)
+- stahuje také povídky
+- při vyhledávání lze využít identifikátory v názvu pro seřazení výsledků a specifikaci vydání
+-> (Název knihy lang:cs publisher:nove_vydavatelsvi pubdate:2020)
+- možnost hledání přes Google/DuckDuckGo
+- dodatečné obálky z Obálky knih (pomocí ISBN)
 [B]Version 2.0.4[/B] - 8 Dec 2023 (seeder)
 - přidány identifikátory v názvu (legie, pubdate, pubyear)
 [B]Version 2.0.3[/B] - 8 Dec 2023 (seeder)
@@ -17,5 +38,5 @@ Now fetches info about all known releases, each with its-own cover.
 Added Publisher and Pubdate capability, rating and ISBN detection
 [B]Version 1.1[/B] - 3 Aug 2011
 Added series detection capability
-[B]Version 1.0[/B] - 3 Aug 2011
+[B]Version 1.0[/B] - 3 Aug 2011 (Miisha)
 Initial release of plugin
